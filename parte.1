@@ -1,0 +1,102 @@
+.\" -*- mode: troff; coding: utf-8 -*-
+.TH "parte" "1" ""
+.SH NAME
+.LP
+\fBparte\fR — simple notification displayer
+.SH SYNOPSIS
+.LP
+\fBparte\fR [options] [\fItext\fR \[u2026]]
+.SH DESCRIPTION
+.LP
+\fBparte\fR is a simple notification displayer that accepts input from
+standard input or command-line arguments.
+.br
+It is highly configurable through its arguments and compile-time options.
+Right-clicking the notification may trigger an action.
+.SH EXAMPLE WITHOUT OPTIONS
+.LP
+.EX
+
+    parte \(dqHello\(dq \(dqThis is another line\(dq
+    echo \(dqHello\enThis is another line\(dq | parte
+    echo \(dqHello\(dq | parte \(dqThis is another line\(dq
+    parte \(dqright clic for echo\(dq && echo \(dqhello world!!\(dq
+.EE
+.LP
+\fBparte\fR return 1 in normal circunstances, 2 in errors and 0 when is closed with a right clic, so yo can make a script work only if you decide to (like above).
+.SH EXIT STATUS
+.LP
+\fBparte\fR returns:
+.IP "\(bu" 3
+\fB0\fR if the notification is closed via right click,
+.if n \
+.sp -1
+.if t \
+.sp -0.25v
+.IP "\(bu" 3
+\fB1\fR under normal termination,
+.if n \
+.sp -1
+.if t \
+.sp -0.25v
+.IP "\(bu" 3
+\fB2\fR on error.
+.SH OPTIONS
+.TP 3
+-h, -?, \(enhelp
+Show help and exit.
+.TP 3
+-u \fImode\fR
+Set the notification mode. Valid modes are \fBlow\fR, \fBnormal\fR and \fBurgent\fR.
+Defaults to \fBnormal\fR.
+.br
+\fBNote:\fR \f(CR-u\fR overrides previous visual settings, so use it before other flags.
+.TP 3
+-t \fIseconds\fR
+Display the notification for \fIseconds\fR seconds.
+.TP 3
+-border-size \fIpixels\fR
+Set the size of the border in pixels.
+.TP 3
+-fg \fI\(lq#RRGGBB\(rq\fR
+Set the foreground (font) color.
+.TP 3
+-bg \fI\(lq#RRGGBB\(rq\fR
+Set the background color.
+.TP 3
+-border-color \fI\(lq#RRGGBB\(rq\fR
+Set the border color.
+.TP 3
+-font \fIpattern\fR
+Set the font using a Fontconfig pattern.
+.TP 3
+-focus-keyboard
+Place the notification on the monitor with keyboard focus.
+.TP 3
+-focus-mouse
+Place the notification on the monitor with mouse focus.
+.LP
+-top-left
+.br
+-top-right
+.br
+-bottom-left
+.br
+-bottom-right
+:   Position the notification on the specified screen corner.
+.SH EXAMPLE WITH OPTIONS
+.LP
+.EX
+
+    parte -fg \(dq#FFFFFF\(dq -bg \(dq#000000\(dq \(dqHello\(dq \(dqThis is another line\(dq
+    echo \(dqHello\enThis is another line very urgent\(dq | parte -u \(dqurgent\(dq
+    echo \(dqHello\(dq | ./parte -u \(dqlow\(dq -t 3 \(dqThis is another line\(dq
+.EE
+.SH LICENCE
+.LP
+Copyright \(co Juan de la Puente Valbuena \c
+.MT softwaredelapuente@gmail.com
+.ME
+Licensed under the EUPL-1.2 see more details in \c
+.UR https://eupl.eu/1.2/en
+.UE
