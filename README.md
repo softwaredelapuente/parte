@@ -56,7 +56,7 @@ Right-clicking the notification may trigger an action.
 
     parte -fg "#FFFFFF" -bg "#000000" "Hello" "This is another line"
     echo "Hello\nThis is another line very urgent" | parte -u "urgent"
-    echo "Hello" | ./parte -u "low" -t 3 "This is another line"
+    echo "Hello" | parte -u "low" -t 3 "This is another line"
 ```
 
 ## INSTALATION
